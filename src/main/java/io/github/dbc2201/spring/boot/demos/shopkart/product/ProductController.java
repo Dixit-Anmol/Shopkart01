@@ -1,6 +1,7 @@
 package io.github.dbc2201.spring.boot.demos.shopkart.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,10 +14,16 @@ import java.util.List;
 @RequestMapping("/api/products")
 public class ProductController {
 
-	private final ProductService productService;
+	private  final ProductService productService;
 
 	@Autowired // dependency injection
-	public ProductController(ProductService productService) {
+	public ProductController(@Qualifier("databaseProductService")
+							 ProductService productService) {
+		this.productService = productService;
+	}
+
+
+	public ProductController(InMemoryProductService productService) {
 		this.productService = productService;
 	}
 
