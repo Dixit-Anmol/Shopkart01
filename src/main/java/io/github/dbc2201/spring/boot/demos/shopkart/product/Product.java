@@ -1,19 +1,33 @@
 package io.github.dbc2201.spring.boot.demos.shopkart.product;
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+@Entity
+@Table(name = "products")
 public class Product {
+	@Id // this represents the primary key
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //this auto-increments the ID
 	private long id;
+
+	@Column(nullable = false) //this decides to name to not be null
 	private String name;
+
+	@Column(nullable = false)
 	private String description;
+
+	@Column(nullable = false)
 	private double price;
+
+	@Column(nullable = false)
 	private String imageUrl;
 
 	public Product() {
 	}
 
-	public Product(long id, String name, String description, double price, String imageUrl) {
-		this.id = id;
+	public Product(String name, String description, double price, String imageUrl) {
+		//this.id = id; id table bnane ki bajay se database me auto increment hogi isilye hatayi hai
 		this.name = name;
 		this.description = description;
 		this.price = price;
@@ -89,3 +103,4 @@ public class Product {
 				'}';
 	}
 }
+// object relationship mapping - orm
